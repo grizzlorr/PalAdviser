@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PalAdviserDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Crane">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="L" Type="float" Nullable="false" />
+          <Property Name="B" Type="float" Nullable="false" />
+          <Property Name="H" Type="float" Nullable="false" />
+          <Property Name="OpL" Type="float" Nullable="false" />
+          <Property Name="OpB" Type="float" Nullable="false" />
+          <Property Name="OpH" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Destination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="L" Type="float" Nullable="false" />
+          <Property Name="B" Type="float" Nullable="false" />
+          <Property Name="H" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="B" Type="float" Nullable="false" />
+          <Property Name="H" Type="float" Nullable="false" />
+          <Property Name="DesId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Gate_To_Destination">
+          <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+          <End Role="Gate" Type="Self.Gate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gate">
+              <PropertyRef Name="DesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PalAdviserDBModelStoreContainer">
+          <EntitySet Name="Crane" EntityType="Self.Crane" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gate" EntityType="Self.Gate" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Gate_To_Destination" Association="Self.FK_Gate_To_Destination">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Gate" EntitySet="Gate" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PalAdviserDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Crane">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="L" Type="Double" Nullable="false" />
+          <Property Name="B" Type="Double" Nullable="false" />
+          <Property Name="H" Type="Double" Nullable="false" />
+          <Property Name="OpL" Type="Double" Nullable="false" />
+          <Property Name="OpB" Type="Double" Nullable="false" />
+          <Property Name="OpH" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Destination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="L" Type="Double" Nullable="false" />
+          <Property Name="B" Type="Double" Nullable="false" />
+          <Property Name="H" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Gate" Relationship="Self.FK_Gate_To_Destination" FromRole="Destination" ToRole="Gate" />
+        </EntityType>
+        <EntityType Name="Gate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="B" Type="Double" Nullable="false" />
+          <Property Name="H" Type="Double" Nullable="false" />
+          <Property Name="DesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Destination" Relationship="Self.FK_Gate_To_Destination" FromRole="Gate" ToRole="Destination" />
+        </EntityType>
+        <Association Name="FK_Gate_To_Destination">
+          <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+          <End Role="Gate" Type="Self.Gate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gate">
+              <PropertyRef Name="DesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PalAdviserDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Crane" EntityType="Self.Crane" />
+          <EntitySet Name="Destination" EntityType="Self.Destination" />
+          <EntitySet Name="Gate" EntityType="Self.Gate" />
+          <AssociationSet Name="FK_Gate_To_Destination" Association="Self.FK_Gate_To_Destination">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Gate" EntitySet="Gate" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PalAdviserDBModelStoreContainer" CdmEntityContainer="PalAdviserDBEntities">
+          <EntitySetMapping Name="Crane">
+            <EntityTypeMapping TypeName="PalAdviserDBModel.Crane">
+              <MappingFragment StoreEntitySet="Crane">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="L" ColumnName="L" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="H" ColumnName="H" />
+                <ScalarProperty Name="OpL" ColumnName="OpL" />
+                <ScalarProperty Name="OpB" ColumnName="OpB" />
+                <ScalarProperty Name="OpH" ColumnName="OpH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Destination">
+            <EntityTypeMapping TypeName="PalAdviserDBModel.Destination">
+              <MappingFragment StoreEntitySet="Destination">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="L" ColumnName="L" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="H" ColumnName="H" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gate">
+            <EntityTypeMapping TypeName="PalAdviserDBModel.Gate">
+              <MappingFragment StoreEntitySet="Gate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="H" ColumnName="H" />
+                <ScalarProperty Name="DesId" ColumnName="DesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
