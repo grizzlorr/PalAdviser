@@ -11,7 +11,8 @@ namespace PalAdvisor.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Destination
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +22,11 @@ namespace PalAdvisor.Models
         }
     
         public int Id { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n2}")]
         public double L { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n2}")]
         public double B { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n2}")]
         public double H { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

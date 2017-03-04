@@ -159,6 +159,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RestController.cs" />
     <Compile Include="Global.asax.cs">
@@ -167,6 +168,7 @@
     <Compile Include="Models\Crane.cs">
       <DependentUpon>Destination.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CraneEvaluator.cs" />
     <Compile Include="Models\DataWrapper\DestinationJson.cs" />
     <Compile Include="Models\DataWrapper\GateJson.cs" />
     <Compile Include="Models\Destination.Context.cs">
@@ -186,6 +188,7 @@
       <DependentUpon>Destination.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="SQL_db\CreateTable_palAdvisor.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -242,6 +245,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Detail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

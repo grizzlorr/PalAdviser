@@ -11,13 +11,17 @@ namespace PalAdvisor.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Gate
     {
         public int Id { get; set; }
-        public double B { get; set; }
-        public double H { get; set; }
         public int DesId { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public double B { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public double H { get; set; }
+
     
         public virtual Destination Destination { get; set; }
     }
